@@ -10,9 +10,9 @@ class Area(models.Model):
 
 
 class GeoPoint(models.Model):
-    area = models.OneToOneField(Area, verbose_name=_('Območje'), on_delete=models.CASCADE, primary_key=True)
-    lon = models.FloatField(verbose_name=_('GEO dolžina'))
-    lat = models.FloatField(verbose_name=_('GEO širina'))
+    area = models.ForeignKey(Area, verbose_name=_('Območje'), on_delete=models.CASCADE)
+    lon = models.FloatField(verbose_name=_('GEO dolžina'), default=0.0)
+    lat = models.FloatField(verbose_name=_('GEO širina'), default=0.0)
 
     def __str__(self):
-        return "GeoPoint: %s" % self.area
+        return "GeoPoint:(%s, %s)" % (self.lon, self.lat)
